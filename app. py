@@ -1,0 +1,55 @@
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Page Title
+st.title("Employee Attrition Dashboard")
+
+# Load Dataset
+df = pd.read_csv("WA_Fn-UseC_-HR-Employee-Attrition (1).csv")
+
+# Dataset Preview
+st.subheader("Dataset Preview")
+st.write(df.head())
+
+# Total Employees
+st.subheader("Total Employees")
+st.write(df.shape[0])
+
+# Attrition Count
+st.subheader("Attrition Count")
+st.write(df['Attrition'].value_counts())
+
+# Department-wise Attrition
+st.subheader("Department-wise Attrition")
+
+dept_attrition = df.groupby('Department')['Attrition'].count()
+
+fig, ax = plt.subplots()
+dept_attrition.plot(kind='bar', ax=ax)
+
+st.pyplot(fig)
+
+# Job Satisfaction Distribution
+st.subheader("Job Satisfaction Distribution")
+
+fig2, ax2 = plt.subplots()
+df['JobSatisfaction'].value_counts().plot(kind='bar', ax=ax2)
+
+st.pyplot(fig2)
+
+# Monthly Income Distribution
+st.subheader("Monthly Income Distribution")
+
+fig3, ax3 = plt.subplots()
+df['MonthlyIncome'].plot(kind='hist', ax=ax3)
+
+st.pyplot(fig3)
+
+# Conclusion
+st.subheader("Project Summary")
+
+st.write("""
+This dashboard analyzes employee attrition trends using HR analytics and machine learning techniques.
+It helps identify factors affecting employee retention such as salary, job satisfaction, and promotion gaps.
+""")
