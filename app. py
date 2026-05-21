@@ -1,5 +1,10 @@
 import streamlit as st
+import pandas as pd
 
-st.title("Employee Attrition
- Dashboard")
-st.write("My Streamlit app is running successfully!")
+st.title("Employee Attrition Dashboard")
+
+st.write("Welcome to my HR Analytics Project")
+
+df = pd.read_csv("WA_Fn-UseC_-HR-Employee-Attrition.csv")
+
+st.write(df.head())
